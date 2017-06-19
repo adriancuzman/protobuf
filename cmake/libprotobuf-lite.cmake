@@ -27,6 +27,11 @@ set(libprotobuf_lite_files
 add_library(libprotobuf-lite ${protobuf_SHARED_OR_STATIC}
   ${libprotobuf_lite_files})
 target_link_libraries(libprotobuf-lite ${CMAKE_THREAD_LIBS_INIT})
+
+if (ANDROID)
+  target_link_libraries(libprotobuf-lite log)
+endif()
+
 target_include_directories(libprotobuf-lite PUBLIC ${protobuf_source_dir}/src)
 if(MSVC AND protobuf_BUILD_SHARED_LIBS)
   target_compile_definitions(libprotobuf-lite
